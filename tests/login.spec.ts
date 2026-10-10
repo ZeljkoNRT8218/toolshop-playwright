@@ -1,6 +1,7 @@
 import {test, expect} from '@playwright/test';
 
 test('user can login in with valid credentials', async({page}) =>{
+    test.skip(!!process.env.CI, 'Toolshop rejects logins from GitHub Actions servers (401)');
     await page.goto('/auth/login');
 
     await page.getByTestId('email').fill('customer2@practicesoftwaretesting.com');
