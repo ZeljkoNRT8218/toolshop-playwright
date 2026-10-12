@@ -1,28 +1,41 @@
-import {type Page, type Locator} from '@playwright/test';
+import { type Page, type Locator } from '@playwright/test';
 
 export class Header {
-readonly page: Page;                      //Link==button
-readonly userMenu: Locator;
-readonly contactLink: Locator
-readonly signOutLink: Locator;
-readonly signInLink: Locator;
-readonly pageTitle: Locator;
+    readonly page: Page;
+    // Categories menu
+    readonly categoriesMenu: Locator;                       //Link==button
+    readonly handToolsLink: Locator;
 
-constructor (page: Page)
-{
-    this.page=page;
-    this.userMenu=page.getByTestId('nav-menu');
-    this.contactLink=page.getByTestId('nav-contact');
-    this.signOutLink=page.getByTestId('nav-sign-out');
-    this.signInLink=page.getByTestId('nav-sign-in');
-    this.pageTitle=page.getByTestId('page-title');
+    readonly contactLink: Locator;
+    // User menu
+    readonly userMenu: Locator;
+    readonly signOutLink: Locator;
+    readonly signInLink: Locator;
+
+    constructor(page: Page) {
+        this.page = page;
+
+        this.categoriesMenu = page.getByTestId('nav-categories');
+        this.handToolsLink = page.getByTestId('nav-hand-tools');
+
+        this.contactLink = page.getByTestId('nav-contact');
+
+        this.userMenu = page.getByTestId('nav-menu');
+        this.signOutLink = page.getByTestId('nav-sign-out');
+        this.signInLink = page.getByTestId('nav-sign-in');
+    }
+
+    async logout() {
+        await this.userMenu.click();
+        await this.signOutLink.click();
+    }
+
+    async goToHandTools() {
+        await this.categoriesMenu.click();
+        await this.handToolsLink.click();
+    }
+
+    async goToContact() {
+        await this.contactLink.click();
+    }
 }
-
-async logout()
-{
-    await this.userMenu.click();
-    await this.signOutLink.click();
-}
-
-
-};
