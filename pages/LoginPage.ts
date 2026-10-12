@@ -1,16 +1,16 @@
 import {type Page, type Locator} from '@playwright/test';
 
-export class LoginPage {
-    readonly page: Page;
-    readonly emailInput: Locator;
+export class LoginPage {                      //pravimo klasu LoginPage
+    readonly page: Page;                      //field    spisak onoga sto svaki objekat ima, ovde su polja =>
+    readonly emailInput: Locator;                        //samo najavljena
     readonly passwordInput: Locator;
     readonly loginButton: Locator;
     readonly loginError: Locator;
     readonly emailError: Locator;
     readonly passwordError: Locator;
-
-constructor (page: Page) {
-    this.page=page;
+                                          //Sta se desi u trenutku pravljenja objekta: popunjavaju se polja
+constructor (page: Page) {             //*(page)nam stize kao parametar, postoji samo dok se konstruktor izvrsava          
+    this.page=page;                    //desno je parametar, levo je polje objekta //linija kaze svaki objekat cuvace jedan tab
     this.emailInput=page.getByTestId('email');
     this.passwordInput=page.getByTestId('password');
     this.loginButton=page.getByTestId('login-submit');
@@ -19,7 +19,7 @@ constructor (page: Page) {
     this.passwordError=page.getByTestId('password-error');
 }
 
-async goto() {
+async goto() {                                //f-je, sta objekat ume da radi (otvori stranicu, uloguje se...)
     await this.page.goto('/auth/login');
 }
 async login(email: string, password: string) {
