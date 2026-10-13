@@ -12,6 +12,7 @@ Written in TypeScript with Playwright, using the Page Object Model.
 - **Login** – valid login, invalid credentials, empty email and password
 - **Account** – a guest is redirected to login; a logged-in user sees the account page and their name, can open the profile page and log out
 - **Navigation** – opening a category from the menu and by its address, opening the contact page
+- **Search** - only matching products are shown; a message is shown when nothing matches; search ignores case; the reset button shows all products again
 
 ## Tech stack
 
@@ -23,7 +24,7 @@ Written in TypeScript with Playwright, using the Page Object Model.
 
 ```
 pages/      page objects (LoginPage, AccountPage, HomePage, CategoryPage, Header)
-tests/      test files (login, account, navigation)
+tests/      test files (login, account, navigation, search)
 .github/    GitHub Actions workflow
 ```
 
@@ -51,6 +52,6 @@ so tests that need a logged-in user are skipped on CI and run locally.
 
 ## Next steps
 
-- Search, filters, cart and checkout tests
+- Filters, cart and checkout tests
 - Reusing the logged-in state between tests
 - API tests

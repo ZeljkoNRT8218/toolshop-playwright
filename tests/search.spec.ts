@@ -28,6 +28,40 @@ test.describe('Search', () => {
 
     });
 
+    test('shows only hammers when searching for hammers', async () => {
+        await homePage.search('hammer')
+        await expect(homePage.searchCaption).toHaveText('Searched for: hammer');
+
+        const names = await homePage.productNames.allInnerTexts();
+        expect(names.length).toBeGreaterThan(0);
+        for (const name of names) {
+            expect(name.toLowerCase()).toContain('hammer');
+        }
+
+    });
+
+    test('ignore upper and lower case', async () => {
+        await homePage.search('PLIERS');
+        await expect(homePage.searchCaption).toHaveText('Searched for: PLIERS')
+
+        const names = await homePage.productNames.allInnerTexts();
+        expect(names.length).toBeGreaterThan(0);
+        for (const name of names) {
+            expect(name.toLowerCase()).toContain('pliers');
+        }
+    });
+
+    test('shows all products again after the search is reset', async () => {
+        await homePage.search('pliers');
+        await expect(homePage.searchCaption).toHaveText('Searched for: pliers')
+        await homePage.resetSearch();
+
+        await expect(homePage.searchCaption).toBeHidden();
+        await expect(homePage.productNames).toHaveCount(9);
+
+
+    });
+
 
 
 });
