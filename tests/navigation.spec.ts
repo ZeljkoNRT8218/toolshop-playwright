@@ -23,13 +23,13 @@ test.describe('Navigation', () => {
 
     test('can open a category directly by its address', async ({ page }) => {
         const categoryPage = new CategoryPage(page);
-        await categoryPage.goto('hand-tools');
-        await expect(page).toHaveURL('/category/hand-tools');
-        await expect(categoryPage.pageTitle).toHaveText('Category: Hand Tools');
+        await categoryPage.goto('power-tools');
+        await expect(page).toHaveURL('/category/power-tools');
+        await expect(categoryPage.pageTitle).toHaveText('Category: Power Tools');
     });
 
     test('can open the contact page from the header', async ({ page }) => {
         await header.goToContact();
         await expect(page).toHaveURL('/contact')
     });
-}); 
+});
