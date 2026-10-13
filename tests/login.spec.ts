@@ -10,7 +10,7 @@ test.describe('Login', () => { //pocetak grupe testova
         await loginPage.goto();
     });
 
-    test('user can log in in with valid credentials', async ({ page }) => {
+    test('user can log in with valid credentials', async ({ page }) => {
         test.skip(!!process.env.CI, 'Toolshop rejects logins from GitHub Actions servers (401)');
         const header = new Header(page);
 
