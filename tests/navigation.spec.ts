@@ -18,10 +18,10 @@ test.describe('Navigation', () => {
         await header.goToHandTools();
         await expect(page).toHaveURL(/hand-tools/);
         await expect(categoryPage.pageTitle).toHaveText('Category: Hand Tools');
-
     });
 
     test('can open a category directly by its address', async ({ page }) => {
+        test.skip(!!process.env.CI, 'Cloudflare blocks direct page loads from GitHub Actions (403)');
         const categoryPage = new CategoryPage(page);
         await categoryPage.goto('power-tools');
         await expect(page).toHaveURL('/category/power-tools');

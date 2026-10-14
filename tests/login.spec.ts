@@ -2,11 +2,11 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../pages/LoginPage';
 import { Header } from '../pages/Header';
 
-test.describe('Login', () => { //pocetak grupe testova
-    let loginPage: LoginPage;  //pravimo promenljivu-u njoj ce stajati objekat samo iz klase LoginPage  :LoginPage (nasa klasa)
+test.describe('Login', () => { //start of the test group
+    let loginPage: LoginPage;  //create a variable that can hold only a (LoginPage class) object.
 
-    test.beforeEach(async ({ page }) => {   //odradi pre svakog testa  *(page)Playwright otvara novi tab i daje nam ga
-        loginPage = new LoginPage(page);  //pravimo novi objekat pre svakog testa  *(page)odlazi u konstruktor
+    test.beforeEach(async ({ page }) => {   //runs before each test  *(page) is a new browser tab that Playwright opens for each test and gives to us
+        loginPage = new LoginPage(page);  //create a new object before each test; (page)is passed to the constructor
         await loginPage.goto();
     });
 

@@ -49,6 +49,7 @@ npx playwright show-report
 Tests run on GitHub Actions on every push and pull request to `main`.
 Toolshop rejects logins coming from GitHub Actions servers (the login request returns 401, found with the Playwright trace viewer),
 so tests that need a logged-in user are skipped on CI and run locally.
+The site is protected by Cloudflare, which sometimes blocks direct page loads from GitHub Actions servers (403), so the test that opens a category by its address is also skipped on CI.
 
 ## Next steps
 

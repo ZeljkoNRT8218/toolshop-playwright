@@ -13,11 +13,11 @@ test.describe('Search', () => {
         await homePage.search('pliers');
         await expect(homePage.searchCaption).toHaveText('Searched for: pliers');
 
-        const names = await homePage.productNames.allInnerTexts();   //list of names   //allInnerTexts uzmi tekst svih elemenata koje lokator nadje i vrati ih kao listu
-        expect(names.length).toBeGreaterThan(0);         //proveri da lista nije prazna
-        for (const name of names) {
-            expect(name.toLowerCase()).toContain('pliers');
-        }
+        const names = await homePage.productNames.allInnerTexts();   //list of names   //allInnerTexts get the text of all elements the locator finds and return them as a list
+        expect(names.length).toBeGreaterThan(0);         //check that the list is not empty
+        for (const name of names) {                 //go through the list, one element at a time
+            expect(name.toLowerCase()).toContain('pliers');  //toContain() is case sensitive
+        }                                              //toLowerCase() converts the name to lowercase
     });
 
     test('shows a message when no product matches', async () => {
@@ -25,7 +25,6 @@ test.describe('Search', () => {
         await expect(homePage.searchCaption).toHaveText('Searched for: Zeljko');
         await expect(homePage.noResults).toHaveText('There are no products found.')
         await expect(homePage.productNames).toHaveCount(0);
-
     });
 
     test('shows only hammers when searching for hammers', async () => {
@@ -37,7 +36,6 @@ test.describe('Search', () => {
         for (const name of names) {
             expect(name.toLowerCase()).toContain('hammer');
         }
-
     });
 
     test('ignore upper and lower case', async () => {
@@ -58,10 +56,5 @@ test.describe('Search', () => {
 
         await expect(homePage.searchCaption).toBeHidden();
         await expect(homePage.productNames).toHaveCount(9);
-
-
     });
-
-
-
 });
