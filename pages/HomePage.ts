@@ -2,17 +2,27 @@ import { type Page, type Locator } from '@playwright/test';
 
 export class HomePage {
     readonly page: Page;
+    //Sort
+    readonly sortDropdown: Locator;
+    readonly productPricess: Locator;
+    readonly sortingCompleted: Locator;
+    //filter
+    readonly filterCompleted: Locator;
+    //search
     readonly searchInput: Locator;
     readonly searchResetXbutton: Locator;
     readonly searchButton: Locator;
     readonly searchCaption: Locator;
     readonly searchCompleted: Locator;
-    readonly productNames: Locator;
     readonly noResults: Locator;
-
+    readonly productNames: Locator;
 
     constructor(page: Page) {
         this.page = page;
+        this.sortDropdown = page.getByTestId('sort');
+        this.productPricess = page.getByTestId('product-price');
+        this.sortingCompleted = page.getByTestId('sorting_completed');
+        this.filterCompleted = page.getByTestId('filter_completed');
         this.searchInput = page.getByTestId('search-query');
         this.searchResetXbutton = page.getByTestId('search-reset');
         this.searchButton = page.getByTestId('search-submit');
@@ -26,14 +36,31 @@ export class HomePage {
         await this.page.goto('/');
         await this.productNames.first().waitFor();
     };
-
     async search(term: string) {
         await this.searchInput.fill(term);
         await this.searchButton.click();
         await this.searchCompleted.waitFor();
     };
-
     async resetSearch() {
         await this.searchResetXbutton.click();
+    }
+    async sortBy(option: string) {
+        await this.sortDropdown.selectOption(option);
+        await this.sortingCompleted.waitFor();
+    }
+    async filterByCategory(category: string) {
+        await this.page.getByRole('checkbox', { name: category, exact: true }).check();
+        await this.filterCompleted.waitFor();
+        //
+    }
+    async getPrices() {
+        const priceText = await this.productPricess.allInnerTexts();
+        return priceText.map(text => Number(text.replace('$', '')));
+        //return- metoda vraca vrednost
+        //priceText.map(...) metoda, napravi novu listu: svaki element stare liste pretvori po pravilu iz zagrade
+        //text =>text se pretvara u...
+        //Number(...) pretvori text u broj
+        //text.replace('$','') zameni $ praznim textom, tj obrisi ga
+        //Svaku cenu pretvori iz teksta u broj i vrati listu brojeva
     }
 };

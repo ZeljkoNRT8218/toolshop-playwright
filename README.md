@@ -13,6 +13,7 @@ Written in TypeScript with Playwright, using the Page Object Model.
 - **Account** – a guest is redirected to login; a logged-in user sees the account page and their name, can open the profile page and log out
 - **Navigation** – opening a category from the menu and by its address, opening the contact page
 - **Search** - only matching products are shown; a message is shown when nothing matches; search ignores case; the reset button shows all products again
+- **Sorting and filters** – products are sorted by name (A–Z, Z–A) and by price (low to high, high to low); the category filter shows only products from the selected category, also after sorting
 
 ## Tech stack
 
@@ -24,7 +25,7 @@ Written in TypeScript with Playwright, using the Page Object Model.
 
 ```
 pages/      page objects (LoginPage, AccountPage, HomePage, CategoryPage, Header)
-tests/      test files (login, account, navigation, search)
+tests/      test files (login, account, navigation, search, sort-filter)
 .github/    GitHub Actions workflow
 ```
 
@@ -53,6 +54,6 @@ The site is protected by Cloudflare, which sometimes blocks direct page loads fr
 
 ## Next steps
 
-- Filters, cart and checkout tests
+- Cart and checkout tests
 - Reusing the logged-in state between tests
 - API tests
