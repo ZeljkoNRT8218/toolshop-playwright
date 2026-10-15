@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { HomePage } from '../pages/HomePage';
 
-test.describe('Sort products', async () => {
+test.describe('Sort products', () => {
     let homePage: HomePage;
 
     test.beforeEach(async ({ page }) => {
@@ -18,7 +18,7 @@ test.describe('Sort products', async () => {
         expect(names).toEqual(sortedNames);  //za liste uvek koristimo toEqual, pita da li je u listama isti sadrzaj
     });
 
-    test('by name from Z to A ', async () => {
+    test('by name from Z to A', async () => {
         await homePage.sortBy('Name (Z - A)');
 
         const names = await homePage.productNames.allInnerTexts();
@@ -46,7 +46,7 @@ test.describe('Sort products', async () => {
     });
 });
 
-test.describe('Filter', async () => {
+test.describe('Filter', () => {
     let homePage: HomePage;
 
     test.beforeEach(async ({ page }) => {
@@ -71,7 +71,7 @@ test.describe('Filter', async () => {
         const names = await homePage.productNames.allInnerTexts();
         expect(names.length).toBeGreaterThan(0);
         for (const name of names) {
-            expect(name.toLowerCase()).toContain('hammer')
+            expect(name.toLowerCase()).toContain('hammer');
         }
 
         await homePage.sortBy('Price (Low - High)');

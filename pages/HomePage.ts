@@ -4,7 +4,7 @@ export class HomePage {
     readonly page: Page;
     //Sort
     readonly sortDropdown: Locator;
-    readonly productPricess: Locator;
+    readonly productPrices: Locator;
     readonly sortingCompleted: Locator;
     //filter
     readonly filterCompleted: Locator;
@@ -20,7 +20,7 @@ export class HomePage {
     constructor(page: Page) {
         this.page = page;
         this.sortDropdown = page.getByTestId('sort');
-        this.productPricess = page.getByTestId('product-price');
+        this.productPrices = page.getByTestId('product-price');
         this.sortingCompleted = page.getByTestId('sorting_completed');
         this.filterCompleted = page.getByTestId('filter_completed');
         this.searchInput = page.getByTestId('search-query');
@@ -51,10 +51,10 @@ export class HomePage {
     async filterByCategory(category: string) {
         await this.page.getByRole('checkbox', { name: category, exact: true }).check();
         await this.filterCompleted.waitFor();
-        //
+
     }
     async getPrices() {
-        const priceText = await this.productPricess.allInnerTexts();
+        const priceText = await this.productPrices.allInnerTexts();
         return priceText.map(text => Number(text.replace('$', '')));
         //return- metoda vraca vrednost
         //priceText.map(...) metoda, napravi novu listu: svaki element stare liste pretvori po pravilu iz zagrade
